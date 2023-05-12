@@ -8,8 +8,8 @@ metadata:
     - react
     - cra
 spec:
-  owner: web@example.com
-  type: website
+  owner: apekshcactus
+  type: service
   parameters:
     - title: Provide some simple information
       required:
@@ -44,6 +44,8 @@ spec:
           ui:options:
             allowedHosts:
               - github.com
+            allowedOwners:
+              - Backstage-Testing-Org
             requestUserCredentials:
               secretsKey: USER_OAUTH_TOKEN
               additionalScopes:
