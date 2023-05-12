@@ -46,11 +46,11 @@ spec:
               - github.com
             allowedOwners:
               - Backstage-Testing-Org
-            requestUserCredentials:
-              secretsKey: USER_OAUTH_TOKEN
-              additionalScopes:
-                github:
-                  - workflow
+#             requestUserCredentials:
+#               secretsKey: USER_OAUTH_TOKEN
+#               additionalScopes:
+#                 github:
+#                   - workflow
   steps:
     - id: template
       name: Fetch Skeleton + Template
@@ -73,7 +73,7 @@ spec:
           - github.com
         description: This is ${{ parameters.component_id }}
         repoUrl: ${{ parameters.repoUrl }}
-        token: ${{ secrets.USER_OAUTH_TOKEN }}
+#         token: ${{ secrets.USER_OAUTH_TOKEN }}
 
     - id: register
       name: Register
