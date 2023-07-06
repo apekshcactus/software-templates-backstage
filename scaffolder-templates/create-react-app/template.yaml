@@ -8,7 +8,7 @@ metadata:
     - react
     - cra
 spec:
-  owner: user:default/apekshcactus
+  owner: user:default/apeksh.agarwal
   type: service
   parameters:
     - title: Provide some simple information
@@ -45,7 +45,7 @@ spec:
             allowedHosts:
               - github.com
             allowedOwners:
-              - Backstage-Testing-Org
+              - cactuscommunications
 #             requestUserCredentials:
 #               secretsKey: USER_OAUTH_TOKEN
 #               additionalScopes:
