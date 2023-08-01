@@ -11,7 +11,7 @@ spec:
   parameters:
     - title: Fill in some steps
       required:
-        - name
+        - title
       properties:
         title:
           title: Title
