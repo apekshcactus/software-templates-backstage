@@ -1,0 +1,67 @@
+apiVersion: scaffolder.backstage.io/v1beta3
+kind: Template
+metadata:
+  name: add-techdocs-to-repo
+  title: Add Tech docs to existing repo template
+  description: scaffolder v1beta3 template to push techdocs starter template to existing github repo
+spec:
+  owner: user:default/apeksh.agarwal
+  type: service
+
+  parameters:
+    - title: Fill in some steps
+      required:
+        - name
+      properties:
+        title:
+          title: Title
+          type: string
+          description: Title of documentation
+          ui:field: EntityNamePicker
+          ui:autofocus: true
+        description:
+          title: Description
+          type: string
+          description: Description of the documentation
+
+    - title: Choose a location
+      required:
+        - repoUrl
+      properties:
+        repoUrl:
+          title: Repository Location
+          type: string
+          ui:field: RepoUrlPicker
+          ui:options:
+            allowedHosts:
+              - github.com
+            allowedOwners:
+              - Backstage-Testing-Org
+
+  steps:
+    - id: fetch-base
+      name: Fetch Base
+      action: fetch:template
+      input:
+        url: ./template
+        values:
+          title: ${{parameters.title}}
+          description: ${{ parameters.description }}
+
+    - id: publish
+      name: Publish
+      action: publish:github:pull-request
+      input:
+        repoUrl: ${{ parameters.repoUrl }}
+        title: "Add techdocs starter template: ${{parameters.title}}"
+        branchName: add-techdocs-${{parameters.title}}
+        description: |
+          # : ${{parameters.title}}
+
+          ${{ parameters.description if parameters.description }}
+
+
+  output:
+    links:
+      - url: ${{steps.publish.output.remoteUrl}}
+        title: "Go to PR"
