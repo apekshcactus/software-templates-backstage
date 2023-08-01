@@ -17,7 +17,6 @@ spec:
           title: Title
           type: string
           description: Title of documentation
-          ui:field: EntityNamePicker
           ui:autofocus: true
         description:
           title: Description
