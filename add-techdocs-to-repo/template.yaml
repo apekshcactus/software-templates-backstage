@@ -12,6 +12,8 @@ spec:
     - title: Fill in some steps
       required:
         - title
+        - sourceBranchName
+        - targetBranchName
       properties:
         title:
           title: Title
@@ -22,6 +24,16 @@ spec:
           title: Description
           type: string
           description: Description of the documentation
+        sourceBranchName:
+          title: Source branch name
+          type: string
+          description: Enter name for source branch
+          ui:field: EntityNamePicker
+        targetBranchName:
+          title: Target branch name
+          type: string
+          description: Enter name of existing branch to merge with
+          ui:field: EntityNamePicker
 
     - title: Choose a location
       required:
@@ -53,11 +65,18 @@ spec:
       input:
         repoUrl: ${{ parameters.repoUrl }}
         title: "Add techdocs starter template: ${{parameters.title}}"
-        branchName: add-techdocs-${{parameters.title}}
+        branchName: add-techdocs-${{parameters.sourceBranchName}}
+        targetBranchName: ${{ parameters.targetBranchName }}
         description: |
           # : ${{parameters.title}}
 
           ${{ parameters.description if parameters.description }}
+      
+    - id: log-message
+      name: Log Message
+      action: debug:log
+      input:
+        message: 'To reference techdocs, add annotation backstage.io/techdocs-ref: dir:. in catalog.yaml'
 
 
   output:
