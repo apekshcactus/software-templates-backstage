@@ -11,10 +11,16 @@ spec:
   parameters:
     - title: Fill in some steps
       required:
+        - component_name
         - title
         - sourceBranchName
         - targetBranchName
       properties:
+        component_name:
+          title: Name of component
+          type: string
+          description: Name of the component
+          ui:field: EntityPicker
         title:
           title: Title
           type: string
@@ -27,7 +33,7 @@ spec:
         sourceBranchName:
           title: Source branch name
           type: string
-          description: Enter name for source branch
+          description: Enter name for source branch to create a merge request from
           ui:field: EntityNamePicker
         targetBranchName:
           title: Target branch name
@@ -48,7 +54,7 @@ spec:
               - github.com
             allowedOwners:
               - Backstage-Testing-Org
-
+    
   steps:
     - id: fetch-base
       name: Fetch Base
@@ -58,6 +64,8 @@ spec:
         values:
           title: ${{parameters.title}}
           description: ${{ parameters.description }}
+          component_name: ${{ parameters.component_name }}
+
 
     - id: publish
       name: Publish
