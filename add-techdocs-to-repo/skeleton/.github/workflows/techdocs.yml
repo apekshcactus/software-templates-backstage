@@ -20,13 +20,25 @@ jobs:
       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
       AWS_REGION: ${{ secrets.AWS_REGION }}
       ENTITY_NAMESPACE: 'default'
-      ENTITY_KIND: 'Component'
-      ENTITY_NAME: ${{ values.component_name }}
+      ENTITY_KIND: 'default'
+      ENTITY_NAME: 'default'
+      ENTITY_IDENTIFIER: ${{ values.component_name }}
       # In a Software template, Scaffolder will replace {{cookiecutter.component_id | jsonify}}
       # with the correct entity name. This is same as metadata.name in the entity's catalog-info.yaml
       # ENTITY_NAME: '{{ cookiecutter.component_id | jsonify }}'
 
     steps:
+
+      - name: Extract values
+        id: extract
+        run: |
+          IFS=':' read -ra ADDR <<< "$ENTITY_IDENTIFIER"
+          ENTITY_KIND="${ADDR[0]}"
+          ENTITY_NAMESPACE_NAME="${ADDR[1]}"
+          IFS='/' read -ra NAMESPACE_NAME <<< "$ENTITY_NAMESPACE_NAME"
+          ENTITY_NAMESPACE="${NAMESPACE_NAME[0]}"
+          ENTITY_NAME="${NAMESPACE_NAME[1]}"
+
       - name: Checkout code
         uses: actions/checkout@v3
 

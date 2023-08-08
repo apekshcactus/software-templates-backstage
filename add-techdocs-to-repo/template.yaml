@@ -19,8 +19,15 @@ spec:
         component_name:
           title: Name of component
           type: string
-          description: Name of the component
+          description: Choose the name of entity to add techdocs for
           ui:field: EntityPicker
+          ui:options:
+            allowedKinds:
+              - Component
+              - API
+              - System
+              - Domain
+              - Resource
         title:
           title: Title
           type: string
@@ -84,7 +91,7 @@ spec:
       name: Log Message
       action: debug:log
       input:
-        message: 'To reference techdocs, add annotation backstage.io/techdocs-ref: dir:. in catalog.yaml'
+        message: 'To reference techdocs, add annotation `backstage.io/techdocs-ref: dir:.` in catalog.yaml'
 
 
   output:
